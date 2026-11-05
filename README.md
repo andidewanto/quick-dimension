@@ -1,41 +1,26 @@
 # Quick Dimension
 
-**Click any object or face to show its dimensions on screen.**
+**Read any size on screen, or get a full A3 drawing in seconds.**
 
-Free · SketchUp 2021+ · Windows & macOS
+Free · SketchUp 2021+ · Version 1.7.0
 
 [**Download**](https://andidewanto.github.io/quick-dimension/) · [**Tutorial**](https://andidewanto.github.io/quick-dimension/tutorial.html)
 
 ---
 
-Quick Dimension shows the width, depth and height of any object or face directly on screen — no text added, no construction lines, no cleanup. Click something, read the measurement. Esc clears it.
+**Live dimensions:** click any object or face to read its size on screen, with nothing added to your model. Three modes: Overall, Object / Face and All.
 
-Three modes:
-- **Overall Dimension**: outermost group (or the whole selection)
-- **Object / Face Dimension**: innermost object; Option/Ctrl-click a face to measure the face
-- **All Dimensions**: object, outer group and face together
-
-Object/Face mode fades or hides the rest of the model (5% opacity or completely hidden) so the measured object stands out.
-
-**Export Dimensioned View** saves the current camera view as a Hidden Line PNG image with overall and part dimensions burned in — for documentation and presentations without switching to LayOut.
-
-Works inside nested groups. Edges show their length. Status bar shows measured values for easy copying. Dimensions stay readable at any zoom.
+**Generate A3 Sheet:** select one or more objects and get a two-page A3 drawing as a PDF and an editable LayOut file. Page 1 has front, top and section views with dimensions, and page 2 has a large isometric with overall sizes. Your model is not changed, because the work happens in a temporary copy. This feature currently runs on macOS only.
 
 ---
 
 ## Bahasa Indonesia
 
-**Klik objek atau face untuk menampilkan ukurannya di layar.**
+**Baca ukuran apa pun di layar, atau dapatkan gambar A3 lengkap dalam hitungan detik.**
 
-Gratis · SketchUp 2021+ · Windows & macOS
+**Dimensi langsung:** klik objek atau face untuk membaca ukurannya di layar, tanpa menambah apa pun ke model. Tiga mode: Overall, Object / Face, dan All.
 
-Quick Dimension menampilkan lebar, kedalaman, dan tinggi objek atau face langsung di layar — tanpa menambah teks, garis konstruksi, atau objek lain ke model. Klik objek, baca ukurannya, Esc untuk menghapus.
-
-Tiga mode: Overall (grup terluar/seluruh seleksi), Object/Face (objek dalam atau face jika pakai Option/Ctrl-click), atau All (objek + outer group + face sekaligus). Mode Object/Face bisa fade atau menyembunyikan objek lain agar objek yang diukur terlihat jelas.
-
-**Export Dimensioned View** menyimpan view Hidden Line PNG dengan dimensi tercetak — untuk dokumentasi/presentasi tanpa ke LayOut.
-
-Bekerja di dalam grup bersarang. Edge menunjukkan panjang. Ukuran tetap terbaca di zoom berapapun.
+**Generate A3 Sheet:** pilih satu atau beberapa objek dan dapatkan gambar A3 dua halaman berupa PDF dan file LayOut yang bisa diedit. Halaman 1 berisi tampak depan, atas, dan potongan berdimensi, dan halaman 2 berisi isometrik besar dengan ukuran keseluruhan. Model Anda tidak berubah karena proses terjadi di salinan sementara. Fitur ini saat ini hanya berjalan di macOS.
 
 ---
 

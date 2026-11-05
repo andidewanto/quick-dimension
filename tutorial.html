@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick Dimension Tutorial</title>
+<meta name="description" content="Quick Dimension tutorial (English / Indonesian).">
+<meta name="color-scheme" content="light dark">
+<style>
+  :root {
+    --desk:#e6e6e3; --win:#fbfbfa; --side:#efefec; --bar:#ececea; --card:#ffffff; --line:#dcdcd7;
+    --ink:#1d1d1b; --muted:#6c6b66; --accent:#2f6fd6; --accent-ink:#ffffff; --sel:#dedeD9; --btn:#ffffff; --tip:#eef3fc;
+    --panel:#f4f4f2; --shadow:0 24px 60px rgba(0,0,0,.18), 0 2px 8px rgba(0,0,0,.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --desk:#161615; --win:#262624; --side:#1f1f1e; --bar:#2b2b29; --card:#2f2f2d; --line:#3b3b38;
+      --ink:#ecebe8; --muted:#9d9b95; --accent:#5b9cf0; --accent-ink:#ffffff; --sel:#3a3a37; --btn:#3a3a37; --tip:#24304a;
+      --panel:#2f2f2d; --shadow:0 24px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 16px; }
+  body { margin:0; background:var(--desk); color:var(--ink); font:15px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .window { background: var(--win); min-height: 100vh; }
+  .brand { display: block; width: 100%; margin: 0 0 14px; padding: 0 6px; }
+  .brand img, .hero .brand img { width: 100%; height: auto; display: block; }
+  .titlebar { position: sticky; top: 0; z-index: 5; height: 48px; display: flex; align-items: center; gap: 12px; padding: 0 14px; background: color-mix(in srgb, var(--bar) 88%, transparent); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); }
+  .titlebar .title { flex: 1; text-align: center; font-weight: 600; font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .langbar { display: flex; flex: none; background: var(--sel); border-radius: 7px; padding: 2px; gap: 0; margin: 0; }
+  .langbar button { font: 600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 3px 12px; border-radius: 5px; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+  .langbar button[aria-pressed="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.18); }
+  .split { display: grid; grid-template-columns: 236px minmax(0, 1fr); min-height: 70vh; }
+  .sidebar { background: var(--side); border-right: 1px solid var(--line); padding: 16px 10px; }
+  .sidebar .inner { position: sticky; top: 64px; }
+  .side-app { display: flex; gap: 10px; align-items: center; padding: 4px 8px 14px; }
+  .side-app img { width: 40px; height: 40px; }
+  .side-app b { display: block; font-size: 14px; line-height: 1.2; }
+  .side-app span { font-size: 12px; color: var(--muted); }
+  .sidebar nav a { display: flex; align-items: center; gap: 9px; padding: 6px 10px; border-radius: 7px; color: var(--ink); font-size: 13.5px; text-decoration: none; }
+  .sidebar nav a:hover { background: var(--sel); text-decoration: none; }
+  .sidebar nav a.active { background: var(--sel); font-weight: 600; }
+  .sidebar nav a img { width: 20px; height: 20px; border-radius: 5px; }
+  .sidebar nav svg { width: 16px; height: 16px; flex: none; color: var(--accent); }
+  .side-sep { font-size: 11px; font-weight: 600; color: var(--muted); padding: 16px 10px 4px; text-transform: none; }
+  .content { padding: 34px 40px 48px; min-width: 0; }
+  .content > section { margin: 0 0 36px; }
+  .hero { display: flex; gap: 22px; align-items: center; margin: 0 0 22px; }
+  .hero img { width: 108px; height: 108px; flex: none; }
+  .hero > div { min-width: 0; }
+  .content p, .content li { overflow-wrap: anywhere; }
+  h1 { font-size: 30px; line-height: 1.15; margin: 0 0 4px; letter-spacing: -.01em; color: var(--ink); }
+  .sub, .lead { color: var(--muted); margin: 0; font-size: 15px; }
+  h2 { font-size: 20px; margin: 0 0 12px; letter-spacing: -.005em; }
+  .content h2 { padding-bottom: 0; border: 0; }
+  h3 { font-size: 15px; margin: 20px 0 8px; }
+  .btns { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 0; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 8px; font-weight: 600; font-size: 13.5px; background: var(--btn); color: var(--ink); border: 1px solid var(--line); box-shadow: 0 1px 1px rgba(0,0,0,.06); text-decoration: none; }
+  .btn:hover { text-decoration: none; filter: brightness(1.06); }
+  .btn.primary { background: linear-gradient(#3d82ee, #2a68d6); color: #fff; border-color: #2a62c9; }
+  .group { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px 18px; }
+  .group > * { margin: 0; }
+  .group ol, .group ul { padding: 12px 0 12px 20px; }
+  .group li { margin: 4px 0; }
+  .rows details { border-bottom: 1px solid var(--line); padding: 11px 0; }
+  .rows details:last-child { border-bottom: 0; }
+  .rows summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  .rows summary::-webkit-details-marker { display: none; }
+  .rows summary::after { content: "›"; color: var(--muted); transform: rotate(0deg); transition: transform .15s; font-weight: 400; }
+  .rows details[open] summary::after { transform: rotate(90deg); }
+  .rows details p { margin: 6px 0 0; color: var(--muted); }
+  .app { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .app:last-child { border-bottom: 0; }
+  .app > img { width: 72px; height: 72px; flex: none; }
+  .app h2 { margin: 0; font-size: 17px; }
+  .app .ver { color: var(--muted); font-size: 12.5px; }
+  .app p { margin: 6px 0 0; }
+  .media { margin: 16px 0 0; }
+  .media video, .shots img, figure img, figure video { width: 100%; border-radius: 10px; border: 1px solid var(--line); background: #111; display: block; }
+  .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 12px 0 0; }
+  .shots img { background: #f6f6f6; }
+  figure { margin: 16px 0; }
+  figcaption { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  ul, ol { padding-left: 22px; }
+  li { margin: 3px 0; }
+  kbd { font: 12px ui-monospace, "SF Mono", Menlo, monospace; background: var(--card); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; }
+  code { font: 13px ui-monospace, "SF Mono", Menlo, monospace; background: var(--sel); padding: 1px 5px; border-radius: 5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; background: var(--card); border-radius: 10px; overflow: hidden; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--panel); font-weight: 600; }
+  .wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; margin: 10px 0; }
+  .wrap table { margin: 0; }
+  .tip { background: var(--tip); border-radius: 10px; padding: 10px 14px; margin: 14px 0; border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); }
+  .tip b { color: var(--accent); }
+  .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin: 12px 0; }
+  .tool { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: flex; gap: 12px; align-items: flex-start; }
+  .tool .ic { width: 40px; height: 40px; flex: none; background: #fff; border-radius: 9px; display: grid; place-items: center; border: 1px solid var(--line); }
+  .tool .ic svg { width: 28px; height: 28px; }
+  .tool b { display: block; }
+  .tool span { color: var(--muted); font-size: 13.5px; }
+  .contact { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+  footer { margin-top: 36px; color: var(--muted); font-size: 12.5px; }
+  html[data-lang="en"] .id, html[data-lang="id"] .en { display: none !important; }
+  @media (max-width: 780px) {
+    .window { margin: 0; border-radius: 0; border: 0; }
+    .split { grid-template-columns: minmax(0, 1fr); }
+    .hero { align-items: flex-start; }
+    .content table { display: block; overflow-x: auto; max-width: 100%; }
+    .sidebar { border-right: 0; border-bottom: 1px solid var(--line); padding: 8px 10px; }
+    .sidebar .inner { position: static; }
+    .side-app { display: none; }
+    .brand { width: 72px; margin: 6px auto 10px; padding: 0; }
+    .sidebar nav { display: flex; gap: 4px; overflow-x: auto; white-space: nowrap; }
+    .side-sep { display: none; }
+    .content { padding: 22px 16px 40px; }
+    .hero img { width: 76px; height: 76px; }
+    h1 { font-size: 25px; }
+  }
+</style>
+<script>
+  // Bahasa: ?lang=en|id → pilihan terakhir → bahasa browser (id → Indonesia, lainnya Inggris).
+  (function () {
+    var d = document.documentElement, q = (location.search.match(/lang=(en|id)/) || [])[1], s = null;
+    try { s = localStorage.getItem('ad_lang'); } catch (e) {}
+    d.dataset.lang = q || s || ((navigator.language || '').toLowerCase().indexOf('id') === 0 ? 'id' : 'en');
+    d.lang = d.dataset.lang;
+  })();
+</script>
+</head>
+<body>
+<div class="window">
+  <header class="titlebar"><div class="title">Quick Dimension — Tutorial</div><nav class="langbar" aria-label="Language"><button data-l="en">EN</button><button data-l="id">ID</button></nav></header>
+  <div class="split">
+    <aside class="sidebar"><div class="inner">
+      <a class="brand" href="https://andidewanto.github.io/sketchup-extensions/" title="Andi Dewanto"><img src="images/brand-andidewanto.png" alt="Andi Dewanto logo"></a>
+      <div class="side-app"><img src="images/quick-dimension-logo.png" alt=""><div><b>Quick Dimension</b><span>Tutorial · 1.7.0</span></div></div>
+      <nav>
+      <a href="./"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><path d="M8 7.2v4M8 4.8v.1" stroke-linecap="round"/></svg><span class="en">Overview</span><span class="id">Ringkasan</span></a>
+      <div class="side-sep">Tutorial</div>
+      <a href="#s1"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 5h8M4 8h8M4 11h5"/></svg><span class="en">1. Install</span><span class="id">1. Instalasi</span></a>
+      <a href="#s2"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 5h8M4 8h8M4 11h5"/></svg><span class="en">2. Live dimensions</span><span class="id">2. Dimensi langsung</span></a>
+      <a href="#s3"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 5h8M4 8h8M4 11h5"/></svg><span class="en">3. Generate A3 Sheet</span><span class="id">3. Generate A3 Sheet</span></a>
+      <a href="#s4"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 5h8M4 8h8M4 11h5"/></svg><span class="en">4. What is on the sheet</span><span class="id">4. Isi lembar</span></a>
+      <a href="#s5"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 5h8M4 8h8M4 11h5"/></svg><span class="en">5. Long booths and angled objects</span><span class="id">5. Booth panjang dan objek miring</span></a>
+      <a href="#s6"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 5h8M4 8h8M4 11h5"/></svg><span class="en">6. Uninstall</span><span class="id">6. Uninstall</span></a>
+      <div class="side-sep"><span class="en">More extensions</span><span class="id">Extension lain</span></div>
+      <a href="https://andidewanto.github.io/zone-stretch/"><img src="https://andidewanto.github.io/zone-stretch/images/zone-stretch-logo.png" alt="">Zone Stretch</a>
+      <a href="https://andidewanto.github.io/simple-bevel/"><img src="https://andidewanto.github.io/simple-bevel/images/simple-bevel-logo.png" alt="">Simple Bevel</a>
+      <a href="https://andidewanto.github.io/mapeasy/"><img src="https://andidewanto.github.io/mapeasy/images/mapeasy-logo.png" alt="">MapEasy</a>
+      <a href="https://andidewanto.github.io/sketchup-extensions/"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1.2"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1.2"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1.2"/><rect x="9" y="9" width="4.5" height="4.5" rx="1.2"/></svg><span class="en">All extensions</span><span class="id">Semua extension</span></a>
+      </nav>
+    </div></aside>
+    <main class="content">
+<header class="hero">
+    <img src="images/quick-dimension-logo.png" alt="Quick Dimension logo">
+    <div>
+      <h1>Quick Dimension</h1>
+      <p class="sub en">Read sizes on screen, or generate an A3 drawing from your selection.</p><p class="sub id">Baca ukuran di layar, atau buat gambar A3 dari objek yang dipilih.</p>
+    </div>
+  </header>
+
+  <h2 id="s1"><span class="en">1. Install</span><span class="id">1. Instalasi</span></h2>
+  <div class="group"><ol class="en"><li>Download the <code>.rbz</code> from the <a href="./">main page</a>.</li><li>SketchUp: <b>Extensions › Extension Manager › Install Extension…</b> and choose the file.</li><li>Find it under <b>Extensions › Quick Dimension</b>, or show the toolbar in <b>View › Toolbars</b>.</li></ol><ol class="id"><li>Unduh <code>.rbz</code> dari <a href="./">halaman utama</a>.</li><li>Di SketchUp: <b>Extensions › Extension Manager › Install Extension…</b> lalu pilih filenya.</li><li>Buka lewat <b>Extensions › Quick Dimension</b>, atau tampilkan toolbar di <b>View › Toolbars</b>.</li></ol></div>
+
+  <h2 id="s2"><span class="en">2. Live dimensions</span><span class="id">2. Dimensi langsung</span></h2>
+  <p class="en">Measure on screen without adding anything to the model.</p><p class="id">Ukur di layar tanpa menambah apa pun ke model.</p>
+  <div class="group"><ol class="en"><li>Choose a mode from the toolbar: <b>Overall</b>, <b>Object / Face</b> or <b>All</b>.</li><li>Click an object. Its dimensions appear on screen.</li><li>In Object / Face mode, Option-click (Mac) or Ctrl-click (Windows) a face to measure just that face.</li><li>Press Esc to clear.</li></ol><ol class="id"><li>Pilih mode di toolbar: <b>Overall</b>, <b>Object / Face</b>, atau <b>All</b>.</li><li>Klik objek. Ukurannya muncul di layar.</li><li>Di mode Object / Face, Option-klik (Mac) atau Ctrl-klik (Windows) pada face untuk mengukur face itu saja.</li><li>Tekan Esc untuk menghapus.</li></ol></div>
+  <p class="en">Object / Face mode fades the rest of the model so the measured object stands out. Change this under <b>Extensions › Quick Dimension › Object / Face: Other Objects</b>.</p><p class="id">Mode Object / Face memudarkan bagian lain agar objek yang diukur terlihat jelas. Ubah di <b>Extensions › Quick Dimension › Object / Face: Other Objects</b>.</p>
+
+  <h2 id="s3"><span class="en">3. Generate A3 Sheet</span><span class="id">3. Generate A3 Sheet</span></h2>
+  <div class="group"><ol class="en"><li>Select the object you want to draw. Stay at the top level of the model, not inside an open group.</li><li>Choose <b>Extensions › Quick Dimension › Generate A3 Sheet</b>, or click its toolbar button.</li><li>If several objects are selected, choose <b>One drawing per object</b> or <b>All as one drawing</b>.</li><li>Choose a folder.</li><li>Wait a few seconds. A window called "QD temporary" opens and closes by itself. Then the folder opens with your files.</li></ol><ol class="id"><li>Pilih objek yang ingin digambar. Tetap di level teratas model, bukan di dalam grup yang terbuka.</li><li>Pilih <b>Extensions › Quick Dimension › Generate A3 Sheet</b>, atau klik tombolnya di toolbar.</li><li>Jika beberapa objek dipilih, pilih <b>One drawing per object</b> atau <b>All as one drawing</b>.</li><li>Pilih folder.</li><li>Tunggu beberapa detik. Jendela bernama "QD temporary" terbuka lalu tertutup sendiri. Setelah itu folder terbuka berisi file Anda.</li></ol></div>
+  <p class="en">You get a <code>.pdf</code> ready to print and a <code>.layout</code> file you can edit. If nothing is selected, a message asks you to select something first.</p><p class="id">Anda mendapat <code>.pdf</code> siap cetak dan file <code>.layout</code> yang bisa diedit. Jika tidak ada yang dipilih, muncul pesan yang meminta Anda memilih objek.</p>
+  <p class="en">Generate A3 Sheet currently runs on macOS only.</p><p class="id">Generate A3 Sheet saat ini hanya berjalan di macOS.</p>
+
+  <h2 id="s4"><span class="en">4. What is on the sheet</span><span class="id">4. Isi lembar</span></h2>
+  <div class="shots"><img src="images/quick-dimension-sheet-1.png" alt="Page 1: front, top and section views"><img src="images/quick-dimension-sheet-2.png" alt="Page 2: isometric view"></div>
+  <div class="group"><ul class="en"><li><b>Page 1:</b> front view, top view and Section A-A, each with its scale. The A marks on the top view show where the section cuts.</li><li><b>Page 2:</b> a large isometric with overall width, depth and height.</li><li><b>Chains:</b> height zones on the left and widths along the bottom, with overall sizes on the outside.</li><li><b>Section:</b> depths sit beside each part, and part labels are on the right.</li><li><b>Repeats:</b> parts in an even row get one label, such as <code>3x 620</code>.</li><li><b>Left undimensioned:</b> parts under 25 mm, and products such as cans.</li></ul><ul class="id"><li><b>Halaman 1:</b> tampak depan, tampak atas, dan Potongan A-A, masing-masing dengan skalanya. Tanda A di tampak atas menunjukkan posisi potongan.</li><li><b>Halaman 2:</b> isometrik besar dengan lebar, kedalaman, dan tinggi keseluruhan.</li><li><b>Rantai dimensi:</b> zona tinggi di kiri dan lebar di bawah, dengan ukuran keseluruhan di bagian luar.</li><li><b>Potongan:</b> kedalaman berada di samping tiap bagian, dan label bagian di sebelah kanan.</li><li><b>Pengulangan:</b> bagian dalam deretan rata cukup satu label, misalnya <code>3x 620</code>.</li><li><b>Tanpa dimensi:</b> bagian di bawah 25 mm, dan produk seperti kaleng.</li></ul></div>
+
+  <h2 id="s5"><span class="en">5. Long booths and angled objects</span><span class="id">5. Booth panjang dan objek miring</span></h2>
+  <div class="group"><ul class="en"><li><b>Long booths:</b> a unit much wider than it is tall gets a wide layout, with the front across the sheet and overall sizes and main widths only. For full detail, select the modules and choose <b>One drawing per object</b>.</li><li><b>Objects at an angle:</b> one selected object sitting at an angle is measured along its own axes, so the front is a true elevation.</li><li><b>Units along the green axis:</b> they are turned so the long side faces the front. Check that it shows the side you expect.</li><li><b>Hidden tags:</b> objects on a hidden tag are ignored, so switch on the tags you want first.</li></ul><ul class="id"><li><b>Booth panjang:</b> unit yang jauh lebih lebar daripada tingginya memakai tata letak lebar, dengan tampak depan selebar lembar dan hanya ukuran keseluruhan serta lebar utama. Untuk detail lengkap, pilih modul lalu pilih <b>One drawing per object</b>.</li><li><b>Objek miring:</b> satu objek terpilih yang posisinya miring diukur mengikuti sumbunya sendiri, sehingga tampak depannya benar.</li><li><b>Unit searah sumbu hijau:</b> diputar agar sisi panjang menghadap depan. Periksa apakah sisi yang tampil sudah sesuai.</li><li><b>Tag tersembunyi:</b> objek pada tag tersembunyi diabaikan, jadi nyalakan dulu tag yang diinginkan.</li></ul></div>
+
+  <h2 id="s6"><span class="en">6. Uninstall</span><span class="id">6. Uninstall</span></h2>
+  <p class="en">Extensions › Extension Manager › select Quick Dimension › Uninstall.</p><p class="id">Extensions › Extension Manager › pilih Quick Dimension › Uninstall.</p>
+
+  <section class="coffee" style="margin:40px 0 0">
+    <div class="coffee-btn"><script type='text/javascript' src='https://edge-cdn.trakteer.id/js/embed/trbtn.min.js?v=14-05-2025'></script><script type='text/javascript'>(function(){var trbtnId=trbtn.init('Buy me a Coffee','#5B9CF0','https://trakteer.id/andidewanto','https://mirror-uploads.trakteer.id/images/units/uic-RaF2HpGRC0f4KQ5EMn5iC0VP50QobnQN1793617816.png','50');trbtn.draw(trbtnId);})();</script></div>
+    <p style="margin:18px 0 0;padding:16px 20px;border:1px solid var(--line);border-radius:14px;color:var(--ink)">Buy me a coffee for IDR 10,000. That's less than a dollar. The plugin is free. The coffee is optional. My wife insisted on this button.</p>
+  </section>
+
+  <footer><span class="en">Quick Dimension 1.7.0 · Andi Dewanto · Windows &amp; Mac · SketchUp 2021+ (tested on SketchUp 2026, macOS)</span><span class="id">Quick Dimension 1.7.0 · Andi Dewanto · Windows &amp; Mac · SketchUp 2021+ (diuji di SketchUp 2026, macOS)</span> · <a href="./">Quick Dimension</a> · <a href="https://andidewanto.github.io/sketchup-extensions/">More extensions</a></footer>
+    </main>
+  </div>
+</div>
+<script>
+  (function () {
+    var d = document.documentElement;
+    function sync() { document.querySelectorAll('.langbar button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.l === d.dataset.lang)); }); }
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('.langbar button');
+      if (!b) return;
+      d.dataset.lang = d.lang = b.dataset.l;
+      try { localStorage.setItem('ad_lang', b.dataset.l); } catch (err) {}
+      sync();
+    });
+    sync();
+  })();
+</script>
+<script>
+  // Sorot item sidebar sesuai bagian yang terlihat.
+  (function () {
+    var links = [].slice.call(document.querySelectorAll('.sidebar nav a[href^="#"]'));
+    if (!links.length || !('IntersectionObserver' in window)) return;
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        links.forEach(function (a) { a.classList.remove('active'); });
+        var a = map[e.target.id]; if (a) a.classList.add('active');
+      });
+    }, { rootMargin: '-10% 0px -75% 0px' });
+    Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+  })();
+</script>
+</body>
+</html>
