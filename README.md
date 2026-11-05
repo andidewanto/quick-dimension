@@ -2,7 +2,7 @@
 
 **Read any size on screen, or get a full A3 drawing in seconds.**
 
-Free · SketchUp 2021+ · Version 1.7.0
+Free · SketchUp 2021+ · Version 1.7.1
 
 [**Download**](https://andidewanto.github.io/quick-dimension/) · [**Tutorial**](https://andidewanto.github.io/quick-dimension/tutorial.html)
 
