@@ -6,6 +6,8 @@ Free · SketchUp 2021+ · Version 1.7.1
 
 [**Download**](https://andidewanto.github.io/quick-dimension/) · [**Tutorial**](https://andidewanto.github.io/quick-dimension/tutorial.html)
 
+> **Press SPACE to exit Quick Dimension.** Esc only clears the measurement.
+
 ---
 
 **Live dimensions:** click any object or face to read its size on screen, with nothing added to your model. Three modes: Overall, Object / Face and All. Esc clears the measurement, and Space goes back to Select.
@@ -17,6 +19,8 @@ Free · SketchUp 2021+ · Version 1.7.1
 ## Bahasa Indonesia
 
 **Baca ukuran apa pun di layar, atau dapatkan gambar A3 lengkap dalam hitungan detik.**
+
+> **Tekan SPASI untuk keluar dari Quick Dimension.** Esc hanya menghapus ukuran.
 
 **Dimensi langsung:** klik objek atau face untuk membaca ukurannya di layar, tanpa menambah apa pun ke model. Tiga mode: Overall, Object / Face, dan All. Esc menghapus ukuran, dan Spasi kembali ke Select.
 
