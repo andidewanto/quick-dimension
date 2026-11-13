@@ -1,6 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- Google Analytics (GA4). .rbz downloads are sent as file_download events. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X81291S5NZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-X81291S5NZ');
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href$=".rbz"]');
+    if (!a) return;
+    var f = a.getAttribute('href').split('/').pop();
+    gtag('event', 'file_download', { file_name: f, file_extension: 'rbz', link_url: a.href,
+      extension_name: f.replace(/^ad_/, '').replace(/-[0-9.]+(-unsigned)?\.rbz$/, '') });
+  });
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quick Dimension Tutorial</title>
